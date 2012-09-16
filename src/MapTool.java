@@ -169,25 +169,21 @@ class ToolGUI extends JPanel
 		buttonPanel.setLayout(flow);
 		buttonPanel.add(load);
 		buttonPanel.add(imgList);
-		//buttonPanel.add(imgLabel);
-		//buttonPanel.add(insert);
 		buttonPanel.add(save);
 		enableGrid.setEnabled(true);
 		buttonPanel.add(enableGrid);
 		buttonPanel.add(text);
 		test.add(mg);
 		MyListener mL = new MyListener();
-		test.addMouseListener(mL);//new PanelListener());
+		test.addMouseListener(mL);
 		test.addMouseMotionListener(mL);
 		/////////////////////////////////////
 
 		//Action Listener calls
-		//insert.addActionListener(new InsertListener());//used to insert image to map
 		save.addActionListener(new SaveListener());//used to save map
-		setSize.addActionListener(new SizeListener());//used to set size of map
-		enableGrid.addActionListener(new EnableListener());
-		load.addActionListener(new LoadListener());
-		imgList.addActionListener(new ListListener());
+		enableGrid.addActionListener(new EnableListener());//used to enable a grid overlay
+		load.addActionListener(new LoadListener());//loads map
+		imgList.addActionListener(new ListListener());//list of image blocks
 		///////////////////////////////////
 
 		//Layout for window
@@ -216,7 +212,6 @@ class ToolGUI extends JPanel
 			Point p = e.getPoint();
 			int x = p.x / 32;
 			int y = p.y / 32;
-		//	System.out.println("X: "+x+" Y: "+y);
 			String imgName = list[imgList.getSelectedIndex()];//what image was selected
 			qq[y][x] = imgName.substring(imgName.lastIndexOf('\\')+1);
 			mg.drawIMG(imgName,x,y,count);
@@ -233,7 +228,6 @@ class ToolGUI extends JPanel
 			int x = arg0.getX() / 32;
 			int y = arg0.getY() / 32;
 			String imgName = list[imgList.getSelectedIndex()];//what image was selected
-		//	System.out.println("X: "+x+" Y: "+y);
 			qq[y][x] = imgName.substring(imgName.lastIndexOf('\\')+1);
 			mg.drawIMG(imgName,x,y,count);
 
@@ -255,26 +249,15 @@ class ToolGUI extends JPanel
 		}
 		@Override
 		public void mouseExited(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void mousePressed(MouseEvent arg0) {
 			inDrag = true;
-			/*count++;
-			int x = arg0.getX() / 32;
-			int y = arg0.getY() / 32;
-			System.out.println ("X: "+x + " Y: "+y);
-			String imgName = list[imgList.getSelectedIndex()];//what image was selected
-			qq[y][x] = imgName.substring(imgName.lastIndexOf('\\')+1);
-			mg.drawIMG(imgName,x,y,count);*/
-
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			inDrag = false;
 
 		}
@@ -340,26 +323,6 @@ class ToolGUI extends JPanel
 				s[i] = (fileNames[i].toString());
 		}
 		return s;
-	}
-	class SizeListener implements ActionListener
-	{
-		public void actionPerformed (ActionEvent e)
-		{
-			JFrame frame = new JFrame();
-			String width = (String)JOptionPane.showInputDialog(frame,"Width?","Set Width",
-					JOptionPane.PLAIN_MESSAGE,null,null,"");
-			String height = (String)JOptionPane.showInputDialog(frame,"Height?","Set Height",
-					JOptionPane.PLAIN_MESSAGE,null,null,"");
-			try
-			{
-				sizeX = Integer.parseInt(width);
-				sizeY = Integer.parseInt(height);
-			}catch (NumberFormatException a)
-			{
-				System.out.println("Invalid numerical value");
-			}
-
-		}
 	}
 	class InsertListener implements ActionListener
 	{
@@ -505,7 +468,7 @@ class MapGrid extends JPanel
 		}
 		catch (IOException e)
 		{
-			//System.out.println("NOPE!");
+			e.printStackTrace();
 		}
 		return img;
 	}
