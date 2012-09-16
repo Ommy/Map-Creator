@@ -156,7 +156,6 @@ class ToolGUI extends JPanel
 		sizeX = xSize/32;
 		sizeY = ySize/32;
 		mg = new MapGrid(xSize,ySize);
-		///System.out.println(xSize +"::"+ySize);
 		////add buttons and stuff to the "top" layout
 		list = loadImageNames();
 		listOfImages = new ImageIcon[list.length];
