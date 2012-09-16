@@ -156,7 +156,7 @@ class ToolGUI extends JPanel
 		sizeX = xSize/32;
 		sizeY = ySize/32;
 		mg = new MapGrid(xSize,ySize);
-		System.out.println(xSize +"::"+ySize);
+		///System.out.println(xSize +"::"+ySize);
 		////add buttons and stuff to the "top" layout
 		list = loadImageNames();
 		listOfImages = new ImageIcon[list.length];
@@ -216,7 +216,7 @@ class ToolGUI extends JPanel
 			Point p = e.getPoint();
 			int x = p.x / 32;
 			int y = p.y / 32;
-			System.out.println("X: "+x+" Y: "+y);
+		//	System.out.println("X: "+x+" Y: "+y);
 			String imgName = list[imgList.getSelectedIndex()];//what image was selected
 			qq[y][x] = imgName.substring(imgName.lastIndexOf('\\')+1);
 			mg.drawIMG(imgName,x,y,count);
@@ -233,7 +233,7 @@ class ToolGUI extends JPanel
 			int x = arg0.getX() / 32;
 			int y = arg0.getY() / 32;
 			String imgName = list[imgList.getSelectedIndex()];//what image was selected
-			System.out.println("X: "+x+" Y: "+y);
+		//	System.out.println("X: "+x+" Y: "+y);
 			qq[y][x] = imgName.substring(imgName.lastIndexOf('\\')+1);
 			mg.drawIMG(imgName,x,y,count);
 
